@@ -38,14 +38,10 @@ Only the API and core modules are included in the initial build. Integrations wi
 ## Build
 
 ```bash
-./mvnw clean verify
+mvn clean verify
 ```
 
-On Windows:
-
-```powershell
-mvnw.cmd clean verify
-```
+A Maven Wrapper will be added as part of the build-tooling setup.
 
 ## Security principles
 
