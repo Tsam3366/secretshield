@@ -9,7 +9,7 @@ This roadmap is directional. Milestones are complete only when implementation, t
 - [ ] Finalize public API contracts.
 
 ## Phase 2 — Framework-independent core
-- [ ] Detection rule model and rule registry.
+- [x] Initial detection rule contracts and rule execution (registry extensibility is provided by immutable rule lists; configurable registry remains future work).
 - [ ] Built-in detectors for credentials, tokens, and selected PII.
 - [ ] Immutable findings that never retain raw secret values.
 - [ ] Masking and redaction strategies.
