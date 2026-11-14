@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PartialMaskingStrategyTest {
     @Test
     void preservesOnlyConfiguredEdges() {
-        assertEquals("a***z", new PartialMaskingStrategy().mask("alice@example.com"));
+        assertEquals("a***m", new PartialMaskingStrategy().mask("alice@example.com"));
         assertEquals("ab***yz", new PartialMaskingStrategy(2, 2).mask("abcdefyz"));
     }
 
