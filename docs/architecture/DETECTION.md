@@ -1,6 +1,6 @@
 # Detection API
 
-The first detection API evaluates one candidate value at a time.
+The detection API evaluates one candidate value at a time.
 
 ## Data flow
 
@@ -15,8 +15,12 @@ The first detection API evaluates one candidate value at a time.
 
 A `SecretFinding` contains category, logical location, rule identifier, and confidence only. It must never contain the matched value.
 
-## Initial built-in rule
+## Built-in rules
 
-`FieldNameDetectionRule` uses an exact, case-insensitive allow-list for common credential field names. It deliberately does not classify generic names such as `key` or `id`, or use substring matching. This limits false positives but means differently named credentials require additional rules.
+- `FieldNameDetectionRule` uses an exact, case-insensitive allow-list for common credential field names. Generic names such as `key` and `id` and substring matches are intentionally excluded.
+- `JwtDetectionRule` recognizes a bounded compact signed-JWT shape, requiring base64url segments and object-shaped decoded header and payload. It does not verify signatures, parse all JSON semantics, or validate claims.
+- `BearerTokenDetectionRule` recognizes opaque bearer credentials in an Authorization header value using the RFC 6750 token character set and a minimum length to reduce false positives.
+- `PemPrivateKeyDetectionRule` recognizes complete PEM blocks for common private-key types. A header without its matching footer is not enough.
+- `EmailAddressDetectionRule` finds common ASCII email forms with bounded local-part and domain lengths using a linear scanner rather than a backtracking regular expression. It is not a full RFC 5322 or internationalized-email parser.
 
-This rule is a metadata heuristic, not proof that the field value is a valid credential. Pattern-based value inspection will be added separately.
+These rules provide conservative indicators, not proof of validity or ownership. Detection confidence is a heuristic and must not be treated as an authentication or authorization decision. Pattern rules inspect candidate values transiently and return metadata only. No rule stores or returns the matched value.

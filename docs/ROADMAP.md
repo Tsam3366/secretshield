@@ -10,8 +10,8 @@ This roadmap is directional. Milestones are complete only when implementation, t
 
 ## Phase 2 — Framework-independent core
 - [x] Initial detection rule contracts and rule execution (registry extensibility is provided by immutable rule lists; configurable registry remains future work).
-- [ ] Built-in detectors for credentials, tokens, and selected PII.
-- [ ] Immutable findings that never retain raw secret values.
+- [x] Initial built-in detectors for JWTs, bearer credentials, PEM private keys, and common ASCII email addresses.
+- [x] Immutable findings that never retain raw secret values.
 - [ ] Masking and redaction strategies.
 - [ ] Bounded object graph traversal and cycle detection.
 - [ ] Safe sanitization for maps, collections, arrays, and nested objects.
