@@ -30,6 +30,12 @@ class EmailAddressDetectionRuleTest {
     }
 
     @Test
+    void detectsEmailFollowedBySentencePunctuation() {
+        assertTrue(rule.detect(input("Contact jane@example.com.")).isPresent());
+        assertTrue(rule.detect(input("Contact jane@example.com..")).isEmpty());
+    }
+
+    @Test
     void handlesOverlongCandidateWithoutBacktrackingRegex() {
         String value = "a".repeat(100_000) + "@example.com";
         assertTrue(rule.detect(input(value)).isEmpty());

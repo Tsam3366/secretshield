@@ -67,6 +67,13 @@ public final class EmailAddressDetectionRule implements DetectionRule {
                     && isDomainCharacter(value.charAt(domainEnd)))) {
             return false;
         }
+        // A final period commonly belongs to the surrounding sentence.
+        if (value.charAt(domainEnd - 1) == '.') {
+            domainEnd--;
+        }
+        if (domainEnd == domainStart) {
+            return false;
+        }
 
         return hasValidDomainLabels(value, domainStart, domainEnd);
     }
