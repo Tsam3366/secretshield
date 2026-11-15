@@ -275,12 +275,7 @@ public final class ObjectGraphTraverser {
             return List.<Child>of().iterator();
         }
 
-        fields.removeIf(field -> {
-            int modifiers = field.getModifiers();
-            return Modifier.isStatic(modifiers)
-                    || Modifier.isTransient(modifiers)
-                    || field.isSynthetic();
-        });
+        fields.removeIf(field -> Modifier.isStatic(field.getModifiers()));
         fields.sort(Comparator.comparing(Field::getName)
                 .thenComparing(field -> field.getDeclaringClass().getName()));
 
