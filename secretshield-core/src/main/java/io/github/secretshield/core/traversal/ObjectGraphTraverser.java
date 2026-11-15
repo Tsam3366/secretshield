@@ -23,8 +23,8 @@ import java.util.function.BiConsumer;
  *
  * <p>Maps (including keys and values), iterables, optionals, arrays, and
  * application objects are visited. Application-object fields are read
- * directly; getters are never invoked. Static, transient, and synthetic
- * fields are excluded. Platform objects outside the supported container
+ * directly; getters are never invoked. Static fields are excluded; transient
+ * and synthetic instance fields are included. Platform objects outside the supported container
  * types are treated as leaves.</p>
  *
  * <p>The visitor receives each value synchronously. It must not retain or
