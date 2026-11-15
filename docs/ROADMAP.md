@@ -13,7 +13,7 @@ This roadmap is directional. Milestones are complete only when implementation, t
 - [x] Initial built-in detectors for JWTs, bearer credentials, PEM private keys, and common ASCII email addresses.
 - [x] Immutable findings that never retain raw secret values.
 - [x] Initial full-mask, partial-mask, and redaction strategies.
-- [ ] Bounded object graph traversal and cycle detection.
+- [x] Bounded object graph traversal and identity-based cycle detection.
 - [ ] Safe sanitization for maps, collections, arrays, and nested objects.
 
 ## Phase 3 — Integrations
