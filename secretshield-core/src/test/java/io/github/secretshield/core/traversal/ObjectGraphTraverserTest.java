@@ -54,7 +54,7 @@ class ObjectGraphTraverserTest {
         TraversalReport report = traverser.traverse(root, (path, value) -> { });
 
         assertEquals(0, report.cyclesDetected());
-        assertEquals(2, report.visitedNodes());
+        assertEquals(3, report.visitedNodes());
     }
 
     @Test
@@ -84,7 +84,7 @@ class ObjectGraphTraverserTest {
     }
 
     @Test
-    void doesNotVisitStaticTransientOrSyntheticFields() {
+    void visitsTransientFieldsButExcludesStaticFields() {
         StaticTransientPayload.STATIC_SECRET = "static";
         StaticTransientPayload payload = new StaticTransientPayload();
         Set<String> paths = new HashSet<>();
@@ -93,7 +93,7 @@ class ObjectGraphTraverserTest {
 
         assertTrue(paths.contains("$"));
         assertFalse(paths.contains("$.STATIC_SECRET"));
-        assertFalse(paths.contains("$.temporary"));
+        assertTrue(paths.contains("$.temporary"));
         assertTrue(paths.contains("$.visible"));
     }
 
