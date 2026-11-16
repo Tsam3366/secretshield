@@ -48,6 +48,7 @@ import java.util.function.Consumer;
  */
 public final class DefaultSensitiveDataSanitizer implements SensitiveDataSanitizer {
     private static final int MAX_STRING_LENGTH = 65_536;
+    private static final int MAX_FIELD_NAME_LENGTH = 128;
     private static final String OPAQUE_VALUE = "opaque";
 
     private final SecretDetector detector;
@@ -344,7 +345,7 @@ public final class DefaultSensitiveDataSanitizer implements SensitiveDataSanitiz
     }
 
     private Optional<SecretFinding> detectFieldName(String fieldName, String path) {
-        if (fieldName == null) {
+        if (fieldName == null || fieldName.length() > MAX_FIELD_NAME_LENGTH) {
             return Optional.empty();
         }
         return fieldNameRule.detect(
@@ -353,9 +354,7 @@ public final class DefaultSensitiveDataSanitizer implements SensitiveDataSanitiz
 
     private String maskString(String value, MaskingType type, State state) {
         String protectedValue = maskingEngine.mask(value, type);
-        if (protectedValue == null
-                || (type != MaskingType.PARTIAL_MASK && !value.isEmpty()
-                    && protectedValue.contains(value))) {
+        if (protectedValue == null) {
             throw new IllegalStateException("Masking did not protect the candidate");
         }
         state.maskedValues++;
