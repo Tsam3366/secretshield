@@ -20,14 +20,14 @@ class DefaultSecretDetectorTest {
     void detectsPasswordFieldWithoutReturningCandidateValue() {
         String secret = "do-not-leak-this-password";
         DetectionInput input = new DetectionInput(
-                "password", new DataLocation("account.password"), secret);
+                "password", new DataLocation("account.credentials"), secret);
 
         DetectionResult result = new DefaultSecretDetector(List.of(fieldNameRule)).detect(input);
 
         assertEquals(1, result.findings().size());
         SecretFinding finding = result.findings().getFirst();
         assertEquals(SecretCategory.PASSWORD, finding.category());
-        assertEquals("account.password", finding.location().path());
+        assertEquals("account.credentials", finding.location().path());
         assertFalse(finding.toString().contains(secret));
         assertFalse(input.toString().contains(secret));
         assertFalse(input.toString().contains("password"));
