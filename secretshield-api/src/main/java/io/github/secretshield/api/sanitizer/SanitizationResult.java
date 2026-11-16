@@ -6,22 +6,37 @@ package io.github.secretshield.api.sanitizer;
  * <p>The returned graph is a detached normalized copy. Its maps and lists
  * remain mutable so that graph cycles and shared references can be preserved.
  * This result retains no reference to the original input graph.</p>
- *
- * @param value sanitized graph
- * @param visitedNodes number of values inspected
- * @param maskedValues number of values replaced by a protection marker
- * @param cyclesDetected number of back-references to active objects
  */
-public record SanitizationResult(
-        Object value,
-        int visitedNodes,
-        int maskedValues,
-        int cyclesDetected) {
+public final class SanitizationResult {
+    private final Object value;
+    private final int visitedNodes;
+    private final int maskedValues;
+    private final int cyclesDetected;
 
-    public SanitizationResult {
+    public SanitizationResult(Object value, int visitedNodes, int maskedValues, int cyclesDetected) {
         if (visitedNodes < 0 || maskedValues < 0 || cyclesDetected < 0) {
             throw new IllegalArgumentException("Sanitization counters must not be negative");
         }
+        this.value = value;
+        this.visitedNodes = visitedNodes;
+        this.maskedValues = maskedValues;
+        this.cyclesDetected = cyclesDetected;
+    }
+
+    public Object value() {
+        return value;
+    }
+
+    public int visitedNodes() {
+        return visitedNodes;
+    }
+
+    public int maskedValues() {
+        return maskedValues;
+    }
+
+    public int cyclesDetected() {
+        return cyclesDetected;
     }
 
     /**
