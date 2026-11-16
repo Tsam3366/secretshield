@@ -130,6 +130,22 @@ class DefaultSensitiveDataSanitizerTest {
     }
 
     @Test
+    void detectorFailureDoesNotExposeCandidateOrCause() {
+        String secret = "detector-failure-secret";
+        DefaultSensitiveDataSanitizer failingSanitizer = new DefaultSensitiveDataSanitizer(
+                input -> {
+                    throw new IllegalStateException(secret);
+                });
+
+        SecretShieldException exception = assertThrows(
+                SecretShieldException.class, () -> failingSanitizer.sanitize("ordinary value"));
+
+        assertEquals("Sanitization failed; no sanitized result was produced", exception.getMessage());
+        assertNull(exception.getCause());
+        assertFalse(exception.toString().contains(secret));
+    }
+
+    @Test
     void nullInputProducesEmptyResult() {
         SanitizationResult result = sanitizer.sanitize(null);
 
