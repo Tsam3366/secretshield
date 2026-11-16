@@ -30,6 +30,7 @@ class DefaultSecretDetectorTest {
         assertEquals("account.password", finding.location().path());
         assertFalse(finding.toString().contains(secret));
         assertFalse(input.toString().contains(secret));
+        assertFalse(input.toString().contains("password"));
         assertFalse(result.toString().contains(secret));
     }
 
