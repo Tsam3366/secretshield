@@ -14,7 +14,7 @@ This roadmap is directional. Milestones are complete only when implementation, t
 - [x] Immutable findings that never retain raw secret values.
 - [x] Initial full-mask, partial-mask, and redaction strategies.
 - [x] Bounded object graph traversal and identity-based cycle detection.
-- [ ] Safe sanitization for maps, collections, arrays, and nested objects.
+- [x] Initial fail-closed sanitization for maps, collections, arrays, and nested objects (normalized copies, cycle preservation, and bounded traversal).
 
 ## Phase 3 — Integrations
 - [ ] Jackson JSON-tree integration.
