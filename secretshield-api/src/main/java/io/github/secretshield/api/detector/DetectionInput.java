@@ -40,7 +40,7 @@ public final class DetectionInput {
 
     @Override
     public String toString() {
-        return "DetectionInput[fieldName=" + fieldName
+        return "DetectionInput[fieldName=" + (fieldName == null ? "null" : "[REDACTED]")
                 + ", location=" + location
                 + ", value=[REDACTED]]";
     }
