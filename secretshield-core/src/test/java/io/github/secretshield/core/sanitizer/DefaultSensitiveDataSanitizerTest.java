@@ -121,6 +121,15 @@ class DefaultSensitiveDataSanitizerTest {
     }
 
     @Test
+    void maskingMarkerTextDoesNotCauseAFalseSanitizationFailure() {
+        Map<String, Object> input = Map.of("password", "MASKED");
+
+        Map<?, ?> output = (Map<?, ?>) sanitizer.sanitize(input).value();
+
+        assertEquals("[MASKED]", output.get("password"));
+    }
+
+    @Test
     void nullInputProducesEmptyResult() {
         SanitizationResult result = sanitizer.sanitize(null);
 
