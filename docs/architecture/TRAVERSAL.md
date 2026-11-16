@@ -10,7 +10,7 @@ The core module provides `ObjectGraphTraverser` as a bounded, iterative traversa
 - Object and primitive arrays
 - Application objects through directly readable instance fields
 
-Application-object traversal does not invoke getters. Static, transient, and synthetic fields are excluded. Platform objects outside the supported container types are treated as leaves. Callers should convert unsupported platform types to safe application data before sanitization if they may contain sensitive content.
+Application-object traversal does not invoke getters. Static fields are excluded; transient and synthetic instance fields are included. Platform objects outside the supported container types are treated as leaves. Callers should convert unsupported platform types to safe application data before sanitization if they may contain sensitive content.
 
 ## Resource controls
 
