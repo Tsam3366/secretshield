@@ -15,6 +15,7 @@ This roadmap is directional. Milestones are complete only when implementation, t
 - [x] Initial full-mask, partial-mask, and redaction strategies.
 - [x] Bounded object graph traversal and identity-based cycle detection.
 - [x] Initial fail-closed sanitization for maps, collections, arrays, and nested objects (normalized copies, cycle preservation, and bounded traversal).
+- [x] Initial security regression tests for secret leakage, detector failures, cycles, unsupported values, and resource limits.
 
 ## Phase 3 — Integrations
 - [ ] Jackson JSON-tree integration.
@@ -23,7 +24,7 @@ This roadmap is directional. Milestones are complete only when implementation, t
 - [ ] Log4j2 integration.
 
 ## Phase 4 — Hardening and release
-- [ ] Security-focused regression suite.
+- [ ] Broader security-focused regression suite, including adversarial regex, concurrency, and performance/resource stress testing.
 - [ ] Performance benchmarks and resource-limit validation.
 - [ ] Compatibility and dependency review.
 - [ ] Documentation and examples.
