@@ -218,13 +218,14 @@ public final class DefaultSensitiveDataSanitizer implements SensitiveDataSanitiz
         Map.Entry<?, ?> entry = entries.next();
         int current = index[0]++;
         Object originalKey = entry.getKey();
+        Object originalValue = entry.getValue();
         Object safeKey = sanitizeMapKey(
                 originalKey, path + "[key#" + current + "]", depth + 1, state);
         String fieldName = originalKey instanceof String key ? key : null;
 
         work.push(() -> processMapNext(entries, output, path, depth, index, state, work));
         work.push(() -> processValue(
-                entry.getValue(), fieldName, path + "[value#" + current + "]", depth + 1,
+                originalValue, fieldName, path + "[value#" + current + "]", depth + 1,
                 value -> {
                     if (output.containsKey(safeKey)) {
                         throw new IllegalStateException("Sanitized map key collision");
